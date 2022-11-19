@@ -1,15 +1,16 @@
 import java.io.Console;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.*;
 
 
 public class GestionTache {
 
     static void menu() {
     
-        System.out.println("----------------------------------------------------");
-        System.out.println("--------------------Menu TODOLIST-------------------");
-        System.out.println("----------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("------------------------------Menu TODOLIST------------------------------");
+        System.out.println("-------------------------------------------------------------------------");
         System.out.println("\t1:Ajouter une tache");
         System.out.println("\t2:Supprimer une tache");
         System.out.println("\t3:Modifier une tache");
@@ -19,7 +20,7 @@ public class GestionTache {
         System.out.println("\t\t51:Prevues");
         System.out.println("\t\t51:Terminées");
         System.out.println("\t0:Pour quitter");
-        System.out.println("----------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------");
         
     }
   
@@ -29,13 +30,16 @@ public class GestionTache {
         Scanner fd = new Scanner(System.in);
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("----------------------Bienvenu dans votre TODOLIST-----------------------");
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("\n\t\t1:Ajouter des taches pour commencer");
-        System.out.println("\n--------------------------------------------------------------------------");
-        
-        System.out.print("Combien de tache voulez-vous avoir dans votre gestionnaire?");
-        
+        System.out.println("-------------------------------------------------------------------------");  
+         
+        System.out.print("\n\tCombien de tache voulez-vous avoir dans votre gestionnaire :");
         int nombreTache = fd.nextInt();
+        
+        
+        
+        
+        
+       
         
         GestionnaireTache gest = new GestionnaireTache(nombreTache);
         Tache tache ;
@@ -90,15 +94,14 @@ public class GestionTache {
             case 4:
                 System.out.println(Arrays.toString(gest.lister()));
             break;
-            case 5:
-
-            break;
             default:
+            System.out.println("Choix invalide");
             break;
         }
         System.out.println("");
         System.out.println("Voulez-vous quitter votre TODOLIST (Y/N)");
         again = fd.next();
+        ClearConsole();
         if(again.equalsIgnoreCase("N")){
             menu();
             
@@ -120,9 +123,28 @@ public class GestionTache {
         
         
     }
+    public static void ClearConsole(){
+        try{
+            String operatingSystem = System.getProperty("os.name"); //Check the current operating system
+              
+            if(operatingSystem.contains("Windows")){        
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            } else {
+                ProcessBuilder pb = new ProcessBuilder("clear");
+                Process startProcess = pb.inheritIO().start();
+
+                startProcess.waitFor();
+            } 
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
      public static void main(String[] args) {
-        menu();
+        
         order();
+        
     }
     
 }
